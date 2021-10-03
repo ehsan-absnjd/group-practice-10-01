@@ -1,5 +1,8 @@
 package entities;
 
+import sun.awt.image.ImageWatched;
+
+import java.util.LinkedList;
 import java.util.Objects;
 
 public class RoadCity {
@@ -25,10 +28,21 @@ public class RoadCity {
         RoadCity roadCity = (RoadCity) o;
         if(!Objects.equals(road, roadCity.road) )
             return false;
-        if(this.road.isBiDirectional() ){
-            return true;
+        int fromIndex = road.getCities().indexOf(from);
+        int toIndex = road.getCities().indexOf(to);
+        int otherFromIndex = roadCity.road.getCities().indexOf(roadCity.from);
+        int otherToIndex = roadCity.road.getCities().indexOf(roadCity.to);
+        if(Math.min(fromIndex,toIndex)>Math.max(otherFromIndex,otherToIndex) ||
+                Math.max(fromIndex,toIndex)<Math.min(otherFromIndex,otherToIndex)
+        ) {
+            return false;
         }else
-            return from <= roadCity.from;
+            return true;
+//        if(this.road.isBiDirectional() ){
+//            this
+//            return true;
+//        }else
+//            return from <= roadCity.from;
     }
 
     @Override

@@ -53,20 +53,16 @@ public class Helper {
         City fromCity = cities.get(from);
         City toCity = cities.get(to);
         for(Road road : (fromCity).getRoads()){
-            RoadCity roadCity = new RoadCity(road , from);
-            if(!roadCities.contains(roadCity)){
-
-                if(road.getsFromTo(fromCity , toCity)) {
-
+                RoadCity roadCity = new RoadCity(road , from , to);
+                if(road.getsFromTo(fromCity , toCity) && !roadCities.contains(roadCity)) {
                     ArrayList<RoadCity> newRoadCities = new ArrayList<>(roadCities);
-                    roadCity = new RoadCity(road , from , to );
                     newRoadCities.add(roadCity);
                     results.add(newRoadCities);
                 }
                 for (City city : road.MultiRoadCitiesFrom(from , to) ) {
-
-                    ArrayList<RoadCity> newRoadCities = new ArrayList<>(roadCities);
                     roadCity = new RoadCity(road , from , city.getId() );
+                    ArrayList<RoadCity> newRoadCities = new ArrayList<>(roadCities);
+                    if(!roadCities.contains(roadCity)){
                     newRoadCities.add(roadCity);
                     getPath(city.getId(), to, newRoadCities , results);
                 }
