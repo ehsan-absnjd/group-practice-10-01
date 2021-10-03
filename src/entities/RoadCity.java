@@ -28,7 +28,7 @@ public class RoadCity {
         if(this.road.isBiDirectional() ){
             return true;
         }else
-            return from >= roadCity.from;
+            return from <= roadCity.from;
     }
 
     @Override

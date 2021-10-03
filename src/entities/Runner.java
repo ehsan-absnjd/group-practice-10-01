@@ -18,8 +18,8 @@ public class Runner {
         helper.addCity(new City(2 , "esfahan"));
         helper.addCity(new City(3 , "shiraz"));
         helper.addCity(new City(4 , "bandar"));
-        Road newroad = new Road(1,"first" , 1,4,new LinkedList<>(Arrays.asList(2,3)) , 10 , 20 , false);
-        Road newroad2 = new Road(2,"second" , 4,1,new LinkedList<>() , 10 , 20 , false);
+        Road newroad = new Road(1,"first" , 1,4,new LinkedList<>(Arrays.asList(2,3)) , 10 , 20 , true);
+        Road newroad2 = new Road(2,"second" , 4,1,new LinkedList<>(Arrays.asList(3)) , 10 , 20 , false);
         Road newroad3 = new Road(3,"third" , 1,2,new LinkedList<>() , 10 , 20 , false);
         helper.addRoad(newroad);
         helper.addRoad(newroad2);

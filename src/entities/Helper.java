@@ -18,8 +18,7 @@ public class Helper {
     }
     public HashSet<ArrayList<RoadCity>> getPath(int from , int to ){
         HashSet<ArrayList<RoadCity>> list = new HashSet<>();
-        if(from ==to)
-            return list;
+
         getPath(from ,to , new ArrayList<RoadCity>() , list);
         return list;
     }
@@ -45,6 +44,8 @@ public class Helper {
     }
 
     public void getPath(int from , int to , ArrayList<RoadCity>  roadCities , HashSet<ArrayList<RoadCity> >  results){
+        if(from ==to)
+            return;
         City fromCity = cities.get(from);
         City toCity = cities.get(to);
         for(Road road : (fromCity).getRoads()){
