@@ -37,8 +37,12 @@ public class Helper {
         Iterator<Road> iterator = roads.iterator();
         while(iterator.hasNext()){
             Road road = iterator.next();
-            if(road.getId()==id)
+            if(road.getId()==id) {
                 iterator.remove();
+                for (Map.Entry<Integer, City> entry : cities.entrySet()){
+                    entry.getValue().getRoads().remove(road);
+                }
+            }
         }
 
     }
