@@ -6,7 +6,7 @@ import java.util.Set;
 public class City {
     private int id;
     private String name;
-    Set<Road> roads = new HashSet<>();
+    private Set<Road> roads = new HashSet<>();
 
     public City(int id, String name) {
         this.id = id;

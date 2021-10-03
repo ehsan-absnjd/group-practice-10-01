@@ -8,8 +8,8 @@ public class Road {
     private String name;
     private int from;
     private int to;
-    private LinkedList<Integer> cities;
-    private ArrayList<City> cityList = new ArrayList<>() ;
+    private LinkedList<Integer> citiesIntegerLinkedList;
+    private LinkedList<City> cityList = new LinkedList<>() ;
     private int speedLimit;
     private int length;
     private boolean biDirectional;
@@ -18,42 +18,54 @@ public class Road {
                 int speedLimit, int length , boolean biDirectional) {
         this.id = id;
         this.name = name;
-        this.from = from;
-        this.to = to;
-        this.cities = (cities != null) ? cities : new LinkedList<>();
+        citiesIntegerLinkedList = (cities != null) ? cities : new LinkedList<>();
         this.speedLimit = speedLimit;
         this.length = length;
-        this.cities.add(0,from);
-        this.cities.add(to);
+        citiesIntegerLinkedList.add(0,from);
+        citiesIntegerLinkedList.add(to);
         this.biDirectional = biDirectional;
     }
 
     public LinkedList<Integer> getCities() {
-        return cities;
+        return citiesIntegerLinkedList;
     }
 
-    public void setCityList(ArrayList<City> cityList) {
-        this.cityList = cityList;
+    public int getId() {
+        return id;
     }
 
     public boolean getsFromTo(City from, City to) {
-        if (cityList.contains(from) && cityList.contains(to))
-            if(cityList.indexOf(from)<cityList.indexOf(to))
+        if (cityList.contains(from) && cityList.contains(to)) {
+            if(biDirectional)
                 return true;
-
+            else if (cityList.indexOf(from) < cityList.indexOf(to))
+                return true;
+        }
         return false;
     }
 
-    public ArrayList<City> getCityList() {
+    public LinkedList<City> getCityList() {
         return cityList;
     }
 
-    public ArrayList<City> MultiRoadCitiesFrom(City fromCity) {
-        int from = cityList.indexOf(fromCity);
+    public ArrayList<City> MultiRoadCitiesFrom(int from, int to) {
+        int indexOfTo = citiesIntegerLinkedList.indexOf(to);
+        int indexOfFrom = citiesIntegerLinkedList.indexOf(from);
+
+
+        int upperLimit=(indexOfTo>indexOfFrom) ? indexOfTo : cityList.size() ;
+        int lowerLimit=(indexOfTo>-1 && indexOfTo<indexOfFrom) ? indexOfTo : 0 ;
         ArrayList<City> cities = new ArrayList<>();
-        for (int i=from+1; i<cityList.size() ; i++ ){
+
+        for (int i=indexOfFrom+1; i<upperLimit ; i++ ){
             if( cityList.get(i).getRoads().size()>1 )
                 cities.add(cityList.get(i));
+        }
+        if(biDirectional){
+            for (int i=lowerLimit; i<indexOfFrom ; i++ ){
+                if( cityList.get(i).getRoads().size()>1 )
+                    cities.add(cityList.get(i));
+            }
         }
         return cities;
     }
@@ -64,5 +76,9 @@ public class Road {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    public boolean isBiDirectional() {
+        return biDirectional;
     }
 }

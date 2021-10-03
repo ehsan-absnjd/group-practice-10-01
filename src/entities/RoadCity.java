@@ -18,16 +18,17 @@ public class RoadCity {
         this.from = from;
     }
 
-    public void setTo(int to) {
-        this.to = to;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RoadCity roadCity = (RoadCity) o;
-        return from >= roadCity.from && Objects.equals(road, roadCity.road);
+        if(!Objects.equals(road, roadCity.road) )
+            return false;
+        if(this.road.isBiDirectional() ){
+            return true;
+        }else
+            return from >= roadCity.from;
     }
 
     @Override
