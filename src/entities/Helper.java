@@ -50,11 +50,9 @@ public class Helper {
     public void getPath(int from , int to , ArrayList<RoadCity>  roadCities , HashSet<ArrayList<RoadCity> >  results){
         if(from ==to)
             return;
-        City fromCity = cities.get(from);
-        City toCity = cities.get(to);
-        for(Road road : (fromCity).getRoads()){
+        for(Road road : cities.get(from).getRoads()){
                 RoadCity roadCity = new RoadCity(road , from , to);
-                if(road.getsFromTo(fromCity , toCity) && !roadCities.contains(roadCity)) {
+                if(road.getsFromTo(from , to) && !roadCities.contains(roadCity)) {
                     ArrayList<RoadCity> newRoadCities = new ArrayList<>(roadCities);
                     newRoadCities.add(roadCity);
                     results.add(newRoadCities);

@@ -34,11 +34,11 @@ public class Road {
         return id;
     }
 
-    public boolean getsFromTo(City from, City to) {
-        if (cityList.contains(from) && cityList.contains(to)) {
+    public boolean getsFromTo(int from, int to) {
+        if (citiesIntegerLinkedList.contains(from) && citiesIntegerLinkedList.contains(to)) {
             if(biDirectional)
                 return true;
-            else if (cityList.indexOf(from) < cityList.indexOf(to))
+            else if (citiesIntegerLinkedList.indexOf(from) < citiesIntegerLinkedList.indexOf(to))
                 return true;
         }
         return false;
